@@ -4,6 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require("mongoose");
+var Invitation = require("./models/Invitation");
+
+
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://projectx:projectx@ds161001.mlab.com:61001/projectx");
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log(">>>> Connected to database <<<<")
+});
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -42,5 +54,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+var test = new Invitation({fromEmployer:"1",toEmployee:"2"});
+test.save();
 
 module.exports = app;
