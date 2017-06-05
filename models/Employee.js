@@ -20,7 +20,8 @@ const employeeSchema = mongoose.Schema({
       lowercase: true
     },
     hashedPassword: {
-      type: String
+      type: String,
+      required: true
     },
     mobile: {
       type: String,
@@ -38,6 +39,14 @@ const employeeSchema = mongoose.Schema({
     lastLogIn: {
       type: Date,
       default: Date.now
+    },
+    lastUpdate: {
+      type: Date,
+      default: Date.now
+    },
+    active: {
+      type: Boolean,
+      default: true
     }
 });
 
