@@ -5,20 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
-var Invitation = require("./models/Invitation");
+var router = require("./router/routes");
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://projectx:projectx@ds161001.mlab.com:61001/projectx");
+const mlabURL = "mongodb://projectx:projectx@ds161001.mlab.com:61001/projectx";
+const localhost = "localhost:27017";
+mongoose.connect(mlabURL);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log(">>>> Connected to database <<<<")
 });
-
-
-var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -34,8 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/', router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -54,8 +51,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-var test = new Invitation({fromEmployer:"1",toEmployee:"2"});
-test.save();
 
 module.exports = app;

@@ -20,7 +20,8 @@ const employerSchema = mongoose.Schema({
       lowercase: true
     },
     hashedPassword: {
-      type: String
+      type: String,
+      required: true
     },
     entity: {
       type: String,
@@ -42,6 +43,14 @@ const employerSchema = mongoose.Schema({
     lastLogIn: {
       type: Date,
       default: Date.now
+    },
+    lastUpdate: {
+      type: Date,
+      default: Date.now
+    },
+    active: {
+      type: Boolean,
+      default: true
     }
 });
 
