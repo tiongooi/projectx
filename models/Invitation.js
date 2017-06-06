@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
 
 const invitationSchema = mongoose.Schema({
-    fromEmployer: {
+    from_employerId: {
       type: String,
       required: true,
       trim: true,
+      default: "Employer ID not set"
     },
-    toEmployee: {
+    to_employeeId: {
       type: String,
       required: true,
       trim: true,
+      default: "Employee ID not set"
     },
     type: {
       type: String,
@@ -22,6 +24,14 @@ const invitationSchema = mongoose.Schema({
     accepted: {
       type: Boolean,
       default: false
+    },
+    lastUpdate: {
+      type: Date,
+      default: Date.now
+    },
+    active: {
+      type: Boolean,
+      default: true
     }
 });
 

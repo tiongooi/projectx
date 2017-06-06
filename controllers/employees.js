@@ -1,4 +1,4 @@
-const Employee = require("../models/Employee");
+var Employee = require("../models/Employee");
 
 exports.create = (req,res) => {
   // create user
