@@ -3,15 +3,19 @@ const mongoose = require('mongoose');
 const connectionSchema = mongoose.Schema({
     employerId: {
       type: String,
-      required: true,
       trim: true
     },
     employeeId: [{
       type: String,
+      trim: true
     }],
     createdAt: {
       type: Date,
       default: Date.now
+    },
+    active: {
+      type: Boolean,
+      default: true
     }
 });
 

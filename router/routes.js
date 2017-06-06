@@ -15,6 +15,9 @@ router.post("/employee/signup", employees.create);
 router.post("/employee/:id/update", employees.update);
 router.post("/employee/:id/delete", employees.delete);
 //invitation
+router.get("/employer/:id/invitations/index", invitations.employerIndex);
+router.get("/employee/:id/invitations/index", invitations.employeeIndex);
+router.get("/:employeeId/invitation/:id/accept", invitations.accept);
 router.get("/:employerId/invitation/:id/delete", invitations.delete);
 router.post("/:employerId/invitation/create", invitations.create);
 
