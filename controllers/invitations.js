@@ -95,11 +95,18 @@ exports.create = (req,res) => {
               console.log("invalid employer ID entered @ " + Date.now());
               res.send("Invalid command");
             } else {
-              newInvitation = new Invitation;
-              newInvitation.from_employerId = user._id;
-              newInvitation.to_employeeId = employeeId;
-              newInvitation.save().then(() => {
-                res.status(200).json("Invitation created: " + newInvitation._id);
+              Invitation.findOne({from_employerId: user._id, to_employeeId: employeeId, active: true})
+              .then((invitation) => {
+                if (invitation !== null) {
+                  res.send("There was already an invitation to this user");
+                } else {
+                  newInvitation = new Invitation;
+                  newInvitation.from_employerId = user._id;
+                  newInvitation.to_employeeId = employeeId;
+                  newInvitation.save().then(() => {
+                    res.status(200).json("Invitation created: " + newInvitation._id);
+                  });
+                }
               });
             }
           });
@@ -127,7 +134,7 @@ exports.delete = (req,res) => {
           invitation.active = false;
           invitation.lastUpdate = Date.now();
           invitation.save().then(() => {
-            res.status(200).json(invitation);
+            res.send("Invitation has been retracted");
         });
       };
     };
