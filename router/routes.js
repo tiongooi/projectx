@@ -3,6 +3,7 @@ var router = express.Router();
 const employers = require("../controllers/employers");
 const employees = require("../controllers/employees");
 const invitations = require("../controllers/invitations");
+const connections = require("../controllers/connections");
 
 //employer
 router.get("/employer/:id/show", employers.show);
@@ -20,5 +21,7 @@ router.get("/employee/:id/invitations/index", invitations.employeeIndex);
 router.get("/:employeeId/invitation/:id/accept", invitations.accept);
 router.get("/:employerId/invitation/:id/delete", invitations.delete);
 router.post("/:employerId/invitation/create", invitations.create);
+//connection
+router.get("/connection/:id/employee/:employeeId/delete", connections.delete);
 
 module.exports = router;
