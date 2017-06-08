@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const jobSchema = mongoose.Schema({
-    belongsToEmployer: {
+    belongsTo_employerId: {
       type: String,
       required: true,
       trim: true,
@@ -24,7 +24,7 @@ const jobSchema = mongoose.Schema({
       type: String,
       required: true
     },
-    assignedTo: [{
+    assignedTo_employeeId: [{
       type: String,
       trim: true
     }],
@@ -43,7 +43,11 @@ const jobSchema = mongoose.Schema({
     comment_commentId: [{
       type: String,
       trim: true
-    }]
+    }],
+    active: {
+      type: Boolean,
+      default: true
+    }
 });
 
 const Job = mongoose.model('Job', jobSchema);

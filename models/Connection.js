@@ -13,6 +13,10 @@ const connectionSchema = mongoose.Schema({
       type: Date,
       default: Date.now
     },
+    lastUpdate: {
+      type: Boolean,
+      default: Date.now
+    },
     active: {
       type: Boolean,
       default: true

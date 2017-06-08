@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const clientSchema = mongoose.Schema({
-    belongsToEmployer: {
+    belongsTo_employerId: {
       type: String,
       required: true,
       trim: true
@@ -9,9 +9,10 @@ const clientSchema = mongoose.Schema({
     clientName: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      lowercase: true
     },
-    mobile: {
+    clientContact: {
       type: String,
       required: true,
       trim: true
@@ -19,7 +20,8 @@ const clientSchema = mongoose.Schema({
     propertyName: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      lowercase: true
     },
     location:{
         number: {
@@ -28,7 +30,8 @@ const clientSchema = mongoose.Schema({
         },
         street: {
           type: String,
-          trim: true
+          trim: true,
+          lowercase: true
         },
         postcode: {
           type: String,
@@ -36,7 +39,13 @@ const clientSchema = mongoose.Schema({
         },
         city: {
           type: String,
-          trim: true
+          trim: true,
+          lowercase: true
+        },
+        country: {
+          type: String,
+          trim: true,
+          default: "Australia"
         }
     },
     type: {
@@ -46,6 +55,14 @@ const clientSchema = mongoose.Schema({
     createdAt: {
       type: Date,
       default: Date.now
+    },
+    lastUpdate: {
+      type: Date,
+      default: Date.now
+    },
+    active: {
+      type: Boolean,
+      default: true
     }
 });
 
