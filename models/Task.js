@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const taskSchema = mongoose.Schema({
-    belongsToEmployer: {
+    belongsTo_employerId: {
       type: String,
       required: true,
       trim: true
@@ -9,7 +9,20 @@ const taskSchema = mongoose.Schema({
     content: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      lowercase: true
+    },
+    active: {
+      type: Boolean,
+      default: true
+    },
+    lastUpdate: {
+      type: Date,
+      default: Date.now
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
     }
 });
 

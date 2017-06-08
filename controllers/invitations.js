@@ -79,13 +79,13 @@ exports.create = (req,res) => {
     if (user == null) {
       res.send("invalid email");
     } else {
-      Connection.findOne({employerId: req.params.employerId, employeeId: user._id})
+      Connection.findOne({employerId: req.params.id, employeeId: user._id})
       .then((connection) => {
         if (connection !== null) {
           res.send("This person is already in your contact");
         } else {
           const employeeId = user._id;
-          Employer.findById(req.params.employerId, (err) => {
+          Employer.findById(req.params.id, (err) => {
             if (err) {
               console.log("invalid employer ID @ invitation/create @ " + Date.now());
               res.send("invalid command");
