@@ -51,6 +51,7 @@ exports.accept = (req,res) => {
     } else {
       invitation.accepted = true;
       invitation.active = false;
+      invitation.lastUpdate = Date.now();
       invitation.save().then((invitation) => {
         Connection.findOne({employerId: invitation.from_employerId})
         .then((connection) => {
