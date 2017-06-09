@@ -10,22 +10,27 @@ exports.employerIndex = (req,res) => {
       console.log("connection/employerIndex @" + Date.now());
       res.send("invalid command");
   }}).then((employer) => {
-    Connection.findOne({employerId: employer._id, active: true}).then((connection) => {
-      if (connection == null) {
-        res.send([]);
-      } else {
-        if (connection.employeeId.length == 0) {
-          res.send("You do not have any connection");
+    if (employer == null) {
+      console.log("connection/employerindex/employer err @" + Date.now());
+      res.send("invalid command");
+    } else {
+      Connection.findOne({employerId: employer._id, active: true}).then((connection) => {
+        if (connection == null) {
+          res.send([]);
         } else {
-          var employees = connection.employeeId.map((employeeId) => {
-            return Employee.findById(employeeId);
-          });
-          Promise.all(employees).then((employees) => {
-            res.status(200).json(employees);
-          });
+          if (connection.employeeId.length == 0) {
+            res.send("You do not have any connection");
+          } else {
+            var employees = connection.employeeId.map((employeeId) => {
+              return Employee.findById(employeeId);
+            });
+            Promise.all(employees).then((employees) => {
+              res.status(200).json(employees);
+            });
+          }
         }
-      }
-    });
+      });
+    }
   })
 };
 
@@ -36,20 +41,25 @@ exports.employeeIndex = (req,res) => {
       console.log("connection/employeeIndex -tampered @ " + Date.now());
       res.send("Invalid command");
   }}).then((employee) => {
-    Connection.find({employeeId: employee._id, active: true})
-    .then((connections) => {
-      if (connections.length == 0) {
-        res.send([]);
-      } else {
-        var employers = connections.map((connection) => {
-          return Employer.findById(connection.employerId);
-          //use then() here if needed to go further, dont forget 2nd "return"
-        });
-        Promise.all(employers).then((employers) => {
-          res.status(200).json(employers);
-        });
-      }
-    });
+    if (employee == null) {
+      console.log("connection/employerindex/employee @" + Date.now());
+      res.send("invalid command");
+    } else {
+      Connection.find({employeeId: employee._id, active: true})
+      .then((connections) => {
+        if (connections.length == 0) {
+          res.send([]);
+        } else {
+          var employers = connections.map((connection) => {
+            return Employer.findById(connection.employerId);
+            //use then() here if needed to go further, dont forget 2nd "return"
+          });
+          Promise.all(employers).then((employers) => {
+            res.status(200).json(employers);
+          });
+        }
+      });
+    }
   });
 };
 
