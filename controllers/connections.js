@@ -14,7 +14,16 @@ exports.employerIndex = (req,res) => {
       if (connection == null) {
         res.send([]);
       } else {
-        res.send(connection.employerId);
+        if (connection.employeeId.length == 0) {
+          res.send("You do not have any connection");
+        } else {
+          var employees = connection.employeeId.map((employeeId) => {
+            return Employee.findById(employeeId);
+          });
+          Promise.all(employees).then((employees) => {
+            res.status(200).json(employees);
+          });
+        }
       }
     });
   })
