@@ -32,9 +32,12 @@ router.get("/employer/:id/clients/index", clients.index);
 router.get("/employer/:employerId/client/:id/delete", clients.delete);
 router.post("/employer/:id/client/create", clients.create);
 router.post("/employer/:employerId/client/:id/update", clients.update);
-//tasks
+//task
 router.get("/employer/:id/tasks/index", tasks.index);
 router.get("/employer/:employerId/task/:id/delete", tasks.delete);
 router.post("/employer/:id/task/create", tasks.create);
+//job
+
+
 
 module.exports = router;
