@@ -36,7 +36,10 @@ router.post("/employer/:employerId/client/:id/update", clients.update);
 router.get("/employer/:id/tasks/index", tasks.index);
 router.get("/employer/:employerId/task/:id/delete", tasks.delete);
 router.post("/employer/:id/task/create", tasks.create);
-//job
+//comment
+router.get("/job/:id/comments/index", comments.index);
+router.get("/job/:jobId/user/:userId/comment/:id/delete", comments.delete);
+router.post("/job/:id/user/:userId/comment/create", comments.create);
 
 
 
