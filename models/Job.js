@@ -24,7 +24,15 @@ const jobSchema = mongoose.Schema({
       type: String,
       required: true
     },
+    jobDate: {
+      type: Date,
+      default: Date.now
+    },
     assignedTo_employeeId: [{
+      type: String,
+      trim: true
+    }],
+    comment_commentId: [{
       type: String,
       trim: true
     }],
@@ -36,14 +44,10 @@ const jobSchema = mongoose.Schema({
       type: Date,
       default: Date.now
     },
-    jobDate: {
+    updatedAt: {
       type: Date,
       default: Date.now
     },
-    comment_commentId: [{
-      type: String,
-      trim: true
-    }],
     active: {
       type: Boolean,
       default: true
