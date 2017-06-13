@@ -37,7 +37,7 @@ exports.create = (req,res) => {
   });
 };
 
-export.delete = (req,res) => {
+exports.delete = (req,res) => {
   //change comment to active to false
   Job.findById(req.params.jobId, (err) => {
     if (err) {
@@ -66,7 +66,7 @@ export.delete = (req,res) => {
   });
 };
 
-export.index = (req,res) => {
+exports.index = (req,res) => {
   //show all comments related to this job
   Job.findById(req.params.id, (err) => {
     if (err) {

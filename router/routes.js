@@ -6,6 +6,8 @@ const invitations = require("../controllers/invitations");
 const connections = require("../controllers/connections");
 const clients = require("../controllers/clients");
 const tasks = require("../controllers/tasks");
+const jobs = require("../controllers/jobs");
+const comments = require("../controllers/comments");
 
 //employer
 router.get("/employer/:id/show", employers.show);
@@ -36,10 +38,17 @@ router.post("/employer/:employerId/client/:id/update", clients.update);
 router.get("/employer/:id/tasks/index", tasks.index);
 router.get("/employer/:employerId/task/:id/delete", tasks.delete);
 router.post("/employer/:id/task/create", tasks.create);
+//job
+router.get("/employee/:id/jobs/index", jobs.employeeIndex);
+router.get("/employer/:id/jobs/index", jobs.employerIndex);
+router.get("/employer/:employerId/job/:id/delete", jobs.delete);
+router.post("/employer/:employerId/job/:id/update", jobs.update);
+router.post("/employer/:id/job/create", jobs.create);
 //comment
 router.get("/job/:id/comments/index", comments.index);
 router.get("/job/:jobId/user/:userId/comment/:id/delete", comments.delete);
 router.post("/job/:id/user/:userId/comment/create", comments.create);
+
 
 
 
